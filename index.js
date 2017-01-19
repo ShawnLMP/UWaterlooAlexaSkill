@@ -10,21 +10,12 @@ var uwAPIClient = new UWaterlooAPI({
 
 
 exports.handler = (event, context) => {
-	
 	try {
-		// New Session
-		if (event.session.new) {
-			console.log("new session");
-		}
-
 		switch (event.request.type) {
 			case "LaunchRequest":
 				console.log("Lanuch Request");
 				context.succeed(
-					generateResponse(
-						{},
-						buildSpeechletResponse("Welcome to UWaterloo", true)
-					)
+					say("Welcome to UWaterloo")
 				)
 				break;
 			case "IntentRequest":
@@ -32,10 +23,7 @@ exports.handler = (event, context) => {
 					case "getWeather":
 						uwAPIClient.get('/weather/current', (error, response) => {
 							context.succeed(
-								generateResponse(
-									{},
-									buildSpeechletResponse("The current temperature is: " + response.data.temperature_current_c, true)
-								)
+								say("The current temperature in the campus is: " + response.data.temperature_current_c + " celsius degree")
 							)
 						})
 						break;
@@ -54,20 +42,20 @@ exports.handler = (event, context) => {
 	}
 }
 
-buildSpeechletResponse = (outputText, shouldEndSession) => {
-	return {
-		outputSpeech: {
-			type: "PlainText",
-			text: outputText
-		},
-		shouldEndSession: shouldEndSession
-	}
-}
 
-generateResponse = (sessionAttributes, speeechletResponse) => {
+/*
+	The most basic function to let Alexa say something
+*/
+say = (speechContent) => {
 	return {
 		version: "1.0",
-		sessionAttributes: sessionAttributes,
-		response: speeechletResponse
+		sessionAttributes: {},
+		response: {
+			outputSpeech: {
+				type: "PlainText",
+				text: speechContent
+			},
+			shouldEndSession: true
+		}
 	}
 }
