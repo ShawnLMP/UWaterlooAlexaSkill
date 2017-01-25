@@ -27,6 +27,13 @@ exports.handler = (event, context) => {
 							)
 						})
 						break;
+					case "getGRT":
+						uwAPIClient.get('/weather/current', (error, response) => {
+							context.succeed(
+								say("The current temperature in the campus is: " + response.data.temperature_current_c + " celsius degree")
+							)
+						})
+						break;
 					default:
 						break;
 				}
