@@ -1,10 +1,10 @@
 {
-  "intents": [
-    { "intent": "getWeather", "slots": [] },
-
-    { "intent": "AMAZON.YesIntent", "slots": [] },
-    { "intent": "AMAZON.NoIntent", "slots": [] },
-    { "intent": "AMAZON.HelpIntent", "slots": [] },
-    { "intent": "AMAZON.RepeatIntent", "slots": [] }
-  ]
+	"intents": [
+		{ "intent": "getWeather", "slots": [] },
+		{ "intent": "TransitInfo", "slots": [] },
+		{ "intent": "AMAZON.YesIntent", "slots": [] },
+		{ "intent": "AMAZON.NoIntent", "slots": [] },
+		{ "intent": "AMAZON.HelpIntent", "slots": [] },
+		{ "intent": "AMAZON.RepeatIntent", "slots": [] }
+	]
 }
